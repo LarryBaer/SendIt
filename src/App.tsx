@@ -8,10 +8,10 @@ import SideBar from "./components/SideBar";
 function App() {
   return (
     <div className="app">
-      <Chat />
+      {/* <Chat />
       <Contacts />
       <Login />
-      <NavBar />
+      <NavBar /> */}
       <SideBar />
     </div>
   );
