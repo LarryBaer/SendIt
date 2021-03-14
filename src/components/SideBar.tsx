@@ -20,14 +20,17 @@ import ChatTab from "./ChatTab";
 
 const useStyles = makeStyles({
   sidebar: {
-    width: "330px",
+    display: "flex",
+    flexDirection: "column",
+    flex:0.25,
+    minWidth:"400px",
     height: "100vh",
     paddingLeft: "40px",
     paddingRight: "40px",
-    backgroundColor: "white",
+    backgroundColor: "#f9fbfc",
   },
   sidebar__nav: {
-    width: "100%",
+    // width: "100%",
     height: "10%",
     display: "flex",
     justifyContent: "space-between",
@@ -38,25 +41,27 @@ const useStyles = makeStyles({
     justifyContent: "space-between",
   },
   chats__selection__header: {
-    paddingLeft: "15px",
+    paddingLeft: "14px",
   },
   chats__selection__options: {
     display: "flex",
     justifyContent: "space-between",
-    paddingLeft: "18px",
+    paddingLeft: "14px",
     paddingRight: "14px",
   },
   search__chats__container: {
     paddingTop: "5vh",
     display: "flex",
     justifyContent: "space-between",
-    paddingLeft: "16px",
+    paddingLeft: "14px",
   },
   search__chats: {
     color: "red",
   },
   chats: {
     paddingTop: "5vh",
+    paddingLeft: "14px",
+    paddingRight: "14px",
   },
   account__icon: {
     fontSize: 30,
@@ -72,6 +77,7 @@ const useStyles = makeStyles({
   },
   add__chat__icon: {
     fontSize: 30,
+    color: "green",
   },
 });
 
@@ -123,12 +129,6 @@ function SideBar() {
         </form>
       </div>
       <div className={classes.chats}>
-        <ChatTab />
-        <ChatTab />
-        <ChatTab />
-        <ChatTab />
-        <ChatTab />
-        <ChatTab />
         <ChatTab />
         <ChatTab />
         <ChatTab />

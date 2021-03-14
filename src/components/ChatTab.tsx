@@ -6,16 +6,22 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 const useStyles = makeStyles({
   chat__tab: {
+    backgroundColor:"white",
+    boxShadow: "0 0 5px #ccc",
+    borderRadius:"5px",
+    marginTop:"10px",
     display: "flex",
     width: "100%",
     height: "60px",
   },
-  chat__tab__img__container: {},
+  chat__tab__img__container: {
+    padding:"5px",
+  },
   chat__tab__img: {
-    color: "green",
+    color: "purple",
     fontSize: 40,
     position: "relative",
-    top: 9,
+    top: 5,
   },
   chat__tab__username: {
     fontWeight: "bold",
