@@ -85,7 +85,7 @@ function Chat() {
           <form>
             <TextField
               id="outlined-basic"
-              label="Outlined"
+              label="Type a message"
               variant="outlined"
             />
           </form>
