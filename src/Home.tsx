@@ -6,26 +6,29 @@ import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
 
 const useStyles = makeStyles({
-    app: {
-        height: "100vh",
-      },
-      app__main: {
-        display: "flex",
-      },
+  app: {
+    height: "100vh",
+  },
+  app__main: {
+    display: "flex",
+  },
 });
 
-function Home() {
-  const classes = useStyles();
+interface HomeProps {
+  setLoggedIn: any;
+}
 
+function Home({ setLoggedIn }: HomeProps) {
+  const classes = useStyles();
   return (
     <div className={classes.app}>
       <div className={classes.app__main}>
-      <SideBar />
-      <Chat />
-      {/* <Contacts />
+        <SideBar setLoggedIn={setLoggedIn} />
+        <Chat />
+        {/* <Contacts />
       <Login />
       <NavBar /> */}
-    </div>
+      </div>
     </div>
   );
 }

@@ -7,6 +7,9 @@ import {
   InputAdornment,
 } from "@material-ui/core";
 
+// Import firebase
+import firebase from "firebase";
+
 // Import icons
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
@@ -81,8 +84,18 @@ const useStyles = makeStyles({
   },
 });
 
-function SideBar() {
+interface HomeProps {
+  setLoggedIn: any;
+}
+
+function SideBar({ setLoggedIn }: HomeProps) {
   const classes = useStyles();
+
+  function signOut() {
+    firebase.auth().signOut();
+    setLoggedIn(false);
+  }
+
   return (
     <div className={classes.sidebar}>
       <div className={classes.sidebar__nav}>
@@ -95,7 +108,7 @@ function SideBar() {
         <IconButton>
           <SettingsIcon className={classes.settings__icon} />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={signOut}>
           <ExitToAppIcon className={classes.exit__icon} />
         </IconButton>
       </div>

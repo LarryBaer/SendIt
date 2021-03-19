@@ -1,64 +1,53 @@
 import React from "react";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import MainImage from "./Images/login_main.jpg";
 import { Grid, TextField, Button } from "@material-ui/core";
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+
+// Import images
+import MainImage from "./Images/login_main.jpg";
+
+// Import firebase
 import firebase from "firebase";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    login: {
-  
-    },
+    login: {},
     login__main__grid: {
-      padding:"50px",
+      padding: "50px",
     },
-    login__right__container: {
-      // backgroundColor: "red",
-      
-    },
-    login__left__container: {
-      // backgroundColor: "blue",
-    },
+    login__right__container: {},
+    login__left__container: {},
     login__main__image: {
-      maxWidth: "100%",
+      // maxWidth: "100%",
     },
-    login__welcome__header: {
-      
-    },
-    welcome__header: {
-      
-    },
+    login__welcome__header: {},
+    welcome__header: {},
     header__brand__word: {
       color: "#61E3A5",
     },
-    google__login__button:{},
-    grid__item:{
-      paddingTop:"20px",
+    google__login__button: {
+      paddingLeft: "none",
+      marginLeft: "none",
     },
-    email__input:{},
-    password__input:{},
-    signin__word:{
-      fontWeight:"bold",
+    grid__item: {
+      paddingTop: "20px",
+    },
+    email__input: {},
+    password__input: {},
+    signin__word: {
+      fontWeight: "bold",
       color: "#61E3A5",
     },
-    login__btn:{
+    login__btn: {
       backgroundColor: "#61E3A5",
     },
   })
 );
-
-function LogIn() {
+interface HomeProps {
+  uiConfig: any;
+}
+function LogIn({ uiConfig }: HomeProps) {
   const classes = useStyles();
-
-  // Config for logging in
-  // var uiConfig: any = {
-  //   signInFlow: "popup",
-  //   signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
-  //   callbacks: {
-  //     signInSuccess: () => false,
-  //   },
-  // };
 
   return (
     <div className={classes.login}>
@@ -67,7 +56,7 @@ function LogIn() {
         className={classes.login__main__grid}
         justify="center"
         alignItems="center"
-        style={{ minHeight: '100vh' }}
+        style={{ minHeight: "100vh" }}
       >
         <Grid item className={classes.login__left__container} lg={8}>
           <img className={classes.login__main__image} src={MainImage}></img>
@@ -79,11 +68,11 @@ function LogIn() {
               <span className={classes.header__brand__word}> SendIt</span>
             </h1>
             <Grid item className={classes.google__login__button}>
-              {/* <StyledFirebaseAuth
+              <StyledFirebaseAuth
                 className={classes.google__login__button}
                 uiConfig={uiConfig}
                 firebaseAuth={firebase.auth()}
-              /> */}
+              />
             </Grid>
             <Grid item className={classes.grid__item}>
               <TextField
@@ -102,7 +91,11 @@ function LogIn() {
               />
             </Grid>
             <Grid item className={classes.grid__item}>
-              <Button className={classes.login__btn} variant="contained" color="primary">
+              <Button
+                className={classes.login__btn}
+                variant="contained"
+                color="primary"
+              >
                 Log In
               </Button>
             </Grid>
