@@ -43,9 +43,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
+
 interface HomeProps {
   uiConfig: any;
 }
+
 function LogIn({ uiConfig }: HomeProps) {
   const classes = useStyles();
 

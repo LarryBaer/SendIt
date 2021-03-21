@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   IconButton,
@@ -80,7 +80,8 @@ const useStyles = makeStyles({
   },
   add__chat__icon: {
     fontSize: 30,
-    color: "green",
+    color:"lightgreen",
+    // color: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(4,77,196,1) 0%, rgba(0,134,255,1) 100%)",
   },
 });
 
@@ -90,6 +91,12 @@ interface HomeProps {
 
 function SideBar({ setLoggedIn }: HomeProps) {
   const classes = useStyles();
+  const [rooms, setRooms] = useState([]);
+
+  useEffect(() =>{
+    console.log("test");
+  }, [])
+
 
   function signOut() {
     firebase.auth().signOut();
