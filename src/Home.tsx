@@ -4,6 +4,7 @@ import Chat from "./components/Chat";
 import Contacts from "./components/Contacts";
 import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
+import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
 const useStyles = makeStyles({
   app: {
@@ -23,11 +24,20 @@ function Home({ setLoggedIn }: HomeProps) {
   return (
     <div className={classes.app}>
       <div className={classes.app__main}>
-        <SideBar setLoggedIn={setLoggedIn} />
-        <Chat />
-        {/* <Contacts />
-      <Login />
-      <NavBar /> */}
+        <BrowserRouter>
+          <SideBar setLoggedIn={setLoggedIn} />
+          <Switch>
+            <Route path="/rooms/:roomId">
+              <Chat />
+            </Route>
+            <Route path="/">
+              <Chat />
+            </Route>
+          </Switch>
+          {/* <Contacts />
+          <Login />
+          <NavBar /> */}
+        </BrowserRouter>
       </div>
     </div>
   );

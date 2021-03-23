@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-
+import { Link } from "react-router-dom";
 // Import icons
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
@@ -35,9 +35,17 @@ const useStyles = makeStyles({
   },
 });
 
-function ChatTab() {
+interface ChatTabProps {
+  key:any,
+  id:any,
+  name:any,
+}
+
+function ChatTab({ key, id, name }: ChatTabProps) {
   const classes = useStyles();
+
   return (
+    <Link to={`/rooms/${id}`}>
     <div className={classes.chat__tab}>
       <div className={classes.chat__tab__img__container}>
         <AccountCircleIcon
@@ -46,12 +54,13 @@ function ChatTab() {
         />
       </div>
       <div className={classes.chat__tab__info}>
-        <div className={classes.chat__tab__username}>John Doe</div>
+        <div className={classes.chat__tab__username}>{name}</div>
         <div className={classes.message__preview}>
           Hey man, this is here to test the UI...
         </div>
       </div>
     </div>
+    </Link>
   );
 }
 

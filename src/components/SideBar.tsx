@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   IconButton,
@@ -9,6 +9,7 @@ import {
 
 // Import firebase
 import firebase from "firebase";
+import { db } from "../firebase";
 
 // Import icons
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
@@ -25,15 +26,14 @@ const useStyles = makeStyles({
   sidebar: {
     display: "flex",
     flexDirection: "column",
-    flex:0.25,
-    minWidth:"400px",
+    flex: 0.25,
+    minWidth: "400px",
     height: "100vh",
     paddingLeft: "40px",
     paddingRight: "40px",
     backgroundColor: "#f9fbfc",
   },
   sidebar__nav: {
-    // width: "100%",
     height: "10%",
     display: "flex",
     justifyContent: "space-between",
@@ -80,8 +80,7 @@ const useStyles = makeStyles({
   },
   add__chat__icon: {
     fontSize: 30,
-    color:"lightgreen",
-    // color: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(4,77,196,1) 0%, rgba(0,134,255,1) 100%)",
+    color: "lightgreen",
   },
 });
 
@@ -91,12 +90,28 @@ interface HomeProps {
 
 function SideBar({ setLoggedIn }: HomeProps) {
   const classes = useStyles();
-  const [rooms, setRooms] = useState([]);
+  const [rooms, setRooms] = useState<any[]>([]);
 
-  useEffect(() =>{
-    console.log("test");
-  }, [])
+  useEffect(() => {
+    db.collection("rooms").onSnapshot((snapshot: any) =>
+      setRooms(
+        snapshot.docs.map((doc: any) => ({
+          id: doc.id,
+          data: doc.data(),
+        }))
+      )
+    );
+  }, []);
 
+  function addNewChat() {
+    const roomName = prompt("Enter a name for the chatroom");
+
+    if (roomName) {
+      db.collection("rooms").add({
+        name: roomName,
+      });
+    }
+  }
 
   function signOut() {
     firebase.auth().signOut();
@@ -123,7 +138,10 @@ function SideBar({ setLoggedIn }: HomeProps) {
         <div className={classes.chats__selection__header__container}>
           <h1 className={classes.chats__selection__header}>Chats</h1>
           <IconButton>
-            <AddCircleIcon className={classes.add__chat__icon} />
+            <AddCircleIcon
+              onClick={addNewChat}
+              className={classes.add__chat__icon}
+            />
           </IconButton>
         </div>
         <div className={classes.chats__selection__options}>
@@ -149,10 +167,9 @@ function SideBar({ setLoggedIn }: HomeProps) {
         </form>
       </div>
       <div className={classes.chats}>
-        <ChatTab />
-        <ChatTab />
-        <ChatTab />
-        <ChatTab />
+        {rooms.map((room) => (
+          <ChatTab key={room.id} id={room.id} name={room.data.name} />
+        ))}
       </div>
     </div>
   );

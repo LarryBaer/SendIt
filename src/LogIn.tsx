@@ -44,11 +44,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface HomeProps {
+interface LoginProps {
   uiConfig: any;
 }
 
-function LogIn({ uiConfig }: HomeProps) {
+function LogIn({ uiConfig }: LoginProps) {
   const classes = useStyles();
 
   return (

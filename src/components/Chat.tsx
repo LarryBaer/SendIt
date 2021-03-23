@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, IconButton } from "@material-ui/core";
+import { useParams } from "react-router-dom";
+import { db } from "../firebase";
 
 // Import icons
 import EmojiEmotionsIcon from "@material-ui/icons/EmojiEmotions";
@@ -37,18 +39,6 @@ const useStyles = makeStyles({
     height: "100vh",
     padding: "20px",
   },
-  chat__footer__container: {
-    flexWrap: "wrap",
-    backgroundColor: "#f9fbfc",
-    width: "100%",
-    height: "60px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  chat__footer__textfield: {
-    display: "flex",
-  },
   chat__msg: {
     position: "relative",
     fontSize: "16px",
@@ -81,23 +71,53 @@ const useStyles = makeStyles({
     marginLeft: "10px",
     fontSize: "xx-small",
   },
-
+  chat__footer__container: {
+    flexWrap: "wrap",
+    backgroundColor: "#f9fbfc",
+    width: "100%",
+    height: "100px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  chat__footer__textfield: {
+    display: "flex",
+  },
   chat__text__field: {
-    width: "700px",
+    width: "500px",
   },
   send__btn: {
-    color: "blue",
+    color: "lightgreen",
   },
+  chat__footer__icons: {},
 });
 
 function Chat() {
   const classes = useStyles();
+  const { roomId } = useParams<{ roomId: any }>();
   const [input, setInput] = useState("");
+  const [roomName, setRoomName] = useState("");
+  const [messages, setMessages] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (roomId) {
+      db.collection("rooms")
+        .doc(roomId)
+        .onSnapshot((snapshot) => setRoomName(snapshot.data()?.name));
+
+      db.collection("rooms")
+        .doc(roomId)
+        .collection("messages")
+        .orderBy("timestamp", "asc")
+        .onSnapshot((snapshot: any) =>
+          setMessages(snapshot.docs.map((doc: any) => doc.data()))
+        );
+    }
+  }, [roomId]);
 
   const sendMessage = (e: any) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      console.log("You typed  >>>", input);
       setInput("");
     }
   };
@@ -109,7 +129,7 @@ function Chat() {
           <AccountCircleIcon fontSize="large" />
         </IconButton>
         <div className={classes.chat__header__info}>
-          <p className={classes.header__info__name}>John Doe</p>
+          <p className={classes.header__info__name}>{roomName}</p>
           <p>Last seen 3 hours ago</p>
         </div>
         <div className={classes.chat__header__right}>
@@ -125,6 +145,17 @@ function Chat() {
         </div>
       </div>
       <div className={classes.chat__main__container}>
+        {messages.map((message) => (
+          <p className={classes.chat__msg}>
+            <span className={classes.chat__name}>{message.name}</span>
+            {message.message}
+            <span className={classes.chat__timestamp}>
+              {new Date(message.timestamp?.toDate()).toUTCString()}
+            </span>
+          </p>
+        ))}
+        {/* 
+        @@@@@ TEST MESSAGES @@@@@
         <p className={classes.chat__msg}>
           <span className={classes.chat__name}>John Doe</span>
           yo this to test the text message
@@ -134,7 +165,7 @@ function Chat() {
           <span className={classes.chat__name}>Bob Smith</span>
           wow these are the coolest texts
           <span className={classes.chat__timestamp}>9:33pm</span>
-        </p>
+        </p> */}
       </div>
       <div className={classes.chat__footer__container}>
         <IconButton>
@@ -156,7 +187,7 @@ function Chat() {
             <SendIcon />
           </IconButton>
         </div>
-        <div className="chat__footer__icons">
+        <div className={classes.chat__footer__icons}>
           <IconButton>
             <PublishIcon />
           </IconButton>
