@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import { db } from "../firebase";
 // Import icons
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
@@ -43,6 +44,20 @@ interface ChatTabProps {
 
 function ChatTab({ key, id, name }: ChatTabProps) {
   const classes = useStyles();
+  const [messages, setMessages] = useState<any[]>([""]);
+
+  // useEffect(() => {
+  //   if(id){
+  //     db.collection('rooms')
+  //     .doc(id)
+  //     .collection('messages')
+  //     .orderBy('timestamp', 'desc')
+  //     .onSnapshot((snapshot) => 
+  //       setMessages(snapshot.docs.map((doc: any) => 
+  //       doc.data()))
+  //     );
+  //   }
+  // })
 
   return (
     <Link to={`/rooms/${id}`}>
@@ -56,7 +71,7 @@ function ChatTab({ key, id, name }: ChatTabProps) {
       <div className={classes.chat__tab__info}>
         <div className={classes.chat__tab__username}>{name}</div>
         <div className={classes.message__preview}>
-          Hey man, this is here to test the UI...
+          {/* <p>{messages[0]?.message}</p> */}
         </div>
       </div>
     </div>

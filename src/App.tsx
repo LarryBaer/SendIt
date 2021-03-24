@@ -27,6 +27,7 @@ function App() {
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         setLoggedIn(true);
+        
       }
     });
   });

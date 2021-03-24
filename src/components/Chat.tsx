@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { TextField, IconButton } from "@material-ui/core";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
+import firebase from "firebase";
 
 // Import icons
 import EmojiEmotionsIcon from "@material-ui/icons/EmojiEmotions";
@@ -99,6 +100,9 @@ function Chat() {
   const [roomName, setRoomName] = useState("");
   const [messages, setMessages] = useState<any[]>([]);
 
+  let user = firebase.auth().currentUser;
+  let username = user?.displayName;
+
   useEffect(() => {
     if (roomId) {
       db.collection("rooms")
@@ -119,6 +123,11 @@ function Chat() {
     if (e.key === "Enter") {
       e.preventDefault();
       setInput("");
+      db.collection('rooms').doc(roomId).collection('messages').add({
+        message: input,
+        name: username,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      })
     }
   };
 
@@ -146,7 +155,7 @@ function Chat() {
       </div>
       <div className={classes.chat__main__container}>
         {messages.map((message) => (
-          <p className={classes.chat__msg}>
+          <p className={`${classes.chat__msg} ${message.name === user?.displayName && (classes.chat__reciever)}`}>
             <span className={classes.chat__name}>{message.name}</span>
             {message.message}
             <span className={classes.chat__timestamp}>
@@ -154,18 +163,6 @@ function Chat() {
             </span>
           </p>
         ))}
-        {/* 
-        @@@@@ TEST MESSAGES @@@@@
-        <p className={classes.chat__msg}>
-          <span className={classes.chat__name}>John Doe</span>
-          yo this to test the text message
-          <span className={classes.chat__timestamp}>9:29pm</span>
-        </p>
-        <p className={classes.chat__reciever}>
-          <span className={classes.chat__name}>Bob Smith</span>
-          wow these are the coolest texts
-          <span className={classes.chat__timestamp}>9:33pm</span>
-        </p> */}
       </div>
       <div className={classes.chat__footer__container}>
         <IconButton>
