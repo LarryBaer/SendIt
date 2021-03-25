@@ -17,17 +17,15 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     login__right__container: {},
     login__left__container: {},
-    login__main__image: {
-      // maxWidth: "100%",
-    },
+    login__main__image: {},
     login__welcome__header: {},
     welcome__header: {},
     header__brand__word: {
       color: "#61E3A5",
     },
     google__login__button: {
-      paddingLeft: "none",
-      marginLeft: "none",
+      padding: "none",
+      margin: "none",
     },
     grid__item: {
       paddingTop: "20px",

@@ -80,7 +80,7 @@ const useStyles = makeStyles({
   },
   add__chat__icon: {
     fontSize: 30,
-    color: "lightgreen",
+    color: "#34e08e",
   },
 });
 

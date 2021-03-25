@@ -7,16 +7,16 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 const useStyles = makeStyles({
   chat__tab: {
-    backgroundColor:"white",
+    backgroundColor: "white",
     boxShadow: "0 0 5px #ccc",
-    borderRadius:"5px",
-    marginTop:"10px",
+    borderRadius: "5px",
+    marginTop: "10px",
     display: "flex",
     width: "100%",
     height: "60px",
   },
   chat__tab__img__container: {
-    padding:"5px",
+    padding: "5px",
   },
   chat__tab__img: {
     color: "purple",
@@ -33,48 +33,49 @@ const useStyles = makeStyles({
     paddingLeft: "10px",
     position: "relative",
     top: 8,
+    color: "black",
+    textDecoration: "none",
   },
 });
 
 interface ChatTabProps {
-  key:any,
-  id:any,
-  name:any,
+  key: any;
+  id: any;
+  name: any;
 }
 
 function ChatTab({ key, id, name }: ChatTabProps) {
   const classes = useStyles();
   const [messages, setMessages] = useState<any[]>([""]);
 
-  // useEffect(() => {
-  //   if(id){
-  //     db.collection('rooms')
-  //     .doc(id)
-  //     .collection('messages')
-  //     .orderBy('timestamp', 'desc')
-  //     .onSnapshot((snapshot) => 
-  //       setMessages(snapshot.docs.map((doc: any) => 
-  //       doc.data()))
-  //     );
-  //   }
-  // })
+  useEffect(() => {
+    if (id) {
+      db.collection("rooms")
+        .doc(id)
+        .collection("messages")
+        .orderBy("timestamp", "desc")
+        .onSnapshot((snapshot) =>
+          setMessages(snapshot.docs.map((doc: any) => doc.data()))
+        );
+    }
+  }, [id]);
 
   return (
     <Link to={`/rooms/${id}`}>
-    <div className={classes.chat__tab}>
-      <div className={classes.chat__tab__img__container}>
-        <AccountCircleIcon
-          fontSize="large"
-          className={classes.chat__tab__img}
-        />
-      </div>
-      <div className={classes.chat__tab__info}>
-        <div className={classes.chat__tab__username}>{name}</div>
-        <div className={classes.message__preview}>
-          {/* <p>{messages[0]?.message}</p> */}
+      <div className={classes.chat__tab}>
+        <div className={classes.chat__tab__img__container}>
+          <AccountCircleIcon
+            fontSize="large"
+            className={classes.chat__tab__img}
+          />
+        </div>
+        <div className={classes.chat__tab__info}>
+          <div className={classes.chat__tab__username}>{name}</div>
+          <div className={classes.message__preview}>
+            <p>{messages[0]?.message}</p>
+          </div>
         </div>
       </div>
-    </div>
     </Link>
   );
 }

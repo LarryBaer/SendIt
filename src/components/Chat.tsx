@@ -88,7 +88,7 @@ const useStyles = makeStyles({
     width: "500px",
   },
   send__btn: {
-    color: "lightgreen",
+    color: "#34e08e",
   },
   chat__footer__icons: {},
 });
@@ -123,11 +123,11 @@ function Chat() {
     if (e.key === "Enter") {
       e.preventDefault();
       setInput("");
-      db.collection('rooms').doc(roomId).collection('messages').add({
+      db.collection("rooms").doc(roomId).collection("messages").add({
         message: input,
         name: username,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      })
+      });
     }
   };
 
@@ -155,7 +155,11 @@ function Chat() {
       </div>
       <div className={classes.chat__main__container}>
         {messages.map((message) => (
-          <p className={`${classes.chat__msg} ${message.name === user?.displayName && (classes.chat__reciever)}`}>
+          <p
+            className={`${classes.chat__msg} ${
+              message.name === user?.displayName && classes.chat__reciever
+            }`}
+          >
             <span className={classes.chat__name}>{message.name}</span>
             {message.message}
             <span className={classes.chat__timestamp}>
