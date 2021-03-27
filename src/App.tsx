@@ -4,13 +4,7 @@ import LogIn from "./LogIn";
 import Home from "./Home";
 
 // Import firebase
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "firebase";
-
-// firebase.initializeApp({
-//   apiKey: "AIzaSyB3hBEyZmLN_vBf7HPpsaWJkqUp5z-veEc",
-//   authDomain: "sendit-97f6a.firebaseapp.com",
-// });
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -27,7 +21,6 @@ function App() {
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         setLoggedIn(true);
-        
       }
     });
   });

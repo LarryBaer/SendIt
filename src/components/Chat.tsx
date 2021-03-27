@@ -7,7 +7,6 @@ import firebase from "firebase";
 
 // Import icons
 import EmojiEmotionsIcon from "@material-ui/icons/EmojiEmotions";
-import SendIcon from "@material-ui/icons/Send";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import AttachFileIcon from "@material-ui/icons/AttachFile";
 import SearchIcon from "@material-ui/icons/Search";
@@ -31,7 +30,6 @@ const useStyles = makeStyles({
   chat__header__info: {
     flex: 1,
   },
-  chat__header__right: {},
   header__info__name: {
     fontWeight: "bold",
   },
@@ -80,17 +78,17 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
+    paddingRight: "20px",
+    paddingLeft: "20px",
   },
   chat__footer__textfield: {
     display: "flex",
   },
   chat__text__field: {
-    width: "500px",
-  },
-  send__btn: {
-    color: "#34e08e",
+    width: "700px",
   },
   chat__footer__icons: {},
+  chat__header__right: {},
 });
 
 function Chat() {
@@ -184,9 +182,6 @@ function Chat() {
               onKeyDown={sendMessage}
             />
           </form>
-          <IconButton className={classes.send__btn}>
-            <SendIcon />
-          </IconButton>
         </div>
         <div className={classes.chat__footer__icons}>
           <IconButton>

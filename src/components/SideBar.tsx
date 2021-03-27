@@ -12,7 +12,6 @@ import firebase from "firebase";
 import { db } from "../firebase";
 
 // Import icons
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import SettingsIcon from "@material-ui/icons/Settings";
@@ -66,6 +65,11 @@ const useStyles = makeStyles({
     paddingLeft: "14px",
     paddingRight: "14px",
   },
+  avatar: {
+    height: "25px",
+    width: "25px",
+    borderRadius: "50%",
+  },
   account__icon: {
     fontSize: 30,
   },
@@ -91,6 +95,7 @@ interface HomeProps {
 function SideBar({ setLoggedIn }: HomeProps) {
   const classes = useStyles();
   const [rooms, setRooms] = useState<any[]>([]);
+  const user = firebase.auth().currentUser;
 
   useEffect(() => {
     db.collection("rooms").onSnapshot((snapshot: any) =>
@@ -122,7 +127,7 @@ function SideBar({ setLoggedIn }: HomeProps) {
     <div className={classes.sidebar}>
       <div className={classes.sidebar__nav}>
         <IconButton>
-          <AccountCircleIcon className={classes.account__icon} />
+          <img src={user?.photoURL!} className={classes.avatar}></img>
         </IconButton>
         <IconButton>
           <PeopleIcon className={classes.contacts__icon} />

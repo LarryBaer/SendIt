@@ -1,10 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+
+// Import components
 import Chat from "./components/Chat";
-import Contacts from "./components/Contacts";
-import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
-import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
 const useStyles = makeStyles({
   app: {
@@ -34,9 +34,6 @@ function Home({ setLoggedIn }: HomeProps) {
               <Chat />
             </Route>
           </Switch>
-          {/* <Contacts />
-          <Login />
-          <NavBar /> */}
         </BrowserRouter>
       </div>
     </div>

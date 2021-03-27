@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import { db } from "../firebase";
+
 // Import icons
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
@@ -19,13 +20,14 @@ const useStyles = makeStyles({
     padding: "5px",
   },
   chat__tab__img: {
-    color: "purple",
+    color: "green",
     fontSize: 40,
     position: "relative",
     top: 5,
   },
   chat__tab__username: {
     fontWeight: "bold",
+    textDecoration: "none",
   },
   message__preview: {},
   chat__tab__info: {
@@ -34,6 +36,8 @@ const useStyles = makeStyles({
     position: "relative",
     top: 8,
     color: "black",
+  },
+  chat__link: {
     textDecoration: "none",
   },
 });
@@ -61,7 +65,7 @@ function ChatTab({ key, id, name }: ChatTabProps) {
   }, [id]);
 
   return (
-    <Link to={`/rooms/${id}`}>
+    <Link to={`/rooms/${id}`} className={classes.chat__link}>
       <div className={classes.chat__tab}>
         <div className={classes.chat__tab__img__container}>
           <AccountCircleIcon
