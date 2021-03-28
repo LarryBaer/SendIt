@@ -20,7 +20,6 @@ const useStyles = makeStyles({
     padding: "5px",
   },
   chat__tab__img: {
-    color: "green",
     fontSize: 40,
     position: "relative",
     top: 5,
@@ -64,6 +63,9 @@ function ChatTab({ key, id, name }: ChatTabProps) {
     }
   }, [id]);
 
+  let colorsArr = ["green", "red","blue","orange", "black"];
+  let randNum = Math.floor(Math.random() * Math.floor(8));
+
   return (
     <Link to={`/rooms/${id}`} className={classes.chat__link}>
       <div className={classes.chat__tab}>
@@ -71,6 +73,7 @@ function ChatTab({ key, id, name }: ChatTabProps) {
           <AccountCircleIcon
             fontSize="large"
             className={classes.chat__tab__img}
+            style={{color: colorsArr[randNum]}}
           />
         </div>
         <div className={classes.chat__tab__info}>
