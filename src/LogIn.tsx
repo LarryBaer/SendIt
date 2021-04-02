@@ -3,7 +3,7 @@ import { Grid, TextField, Button } from "@material-ui/core";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
 // Import images
-import MainImage from "./Images/login_main.jpg";
+import MainImage from "./Images/login_main_image.png";
 
 // Import firebase
 import firebase from "firebase";
@@ -11,27 +11,15 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    login: {},
-    login__main__grid: {
-      padding: "50px",
+    login__main__image: {
+      maxWidth: "100%",
     },
-    login__right__container: {},
-    login__left__container: {},
-    login__main__image: {},
-    login__welcome__header: {},
-    welcome__header: {},
     header__brand__word: {
       color: "#61E3A5",
-    },
-    google__login__button: {
-      padding: "none",
-      margin: "none",
     },
     grid__item: {
       paddingTop: "20px",
     },
-    email__input: {},
-    password__input: {},
     signin__word: {
       fontWeight: "bold",
       color: "#61E3A5",
@@ -39,6 +27,18 @@ const useStyles = makeStyles((theme: Theme) =>
     login__btn: {
       backgroundColor: "#61E3A5",
     },
+    firebaseui_card_content: {
+      backgroundColor: "red",
+    },
+    login: {},
+    login__main__grid: {},
+    login__right__container: {},
+    login__left__container: {},
+    google__login__button: {},
+    login__welcome__header: {},
+    email__input: {},
+    password__input: {},
+    welcome__header: {},
   })
 );
 

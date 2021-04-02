@@ -19,6 +19,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
     flex: 0.75,
     height: "100vh",
+    minWidth:"450px",
   },
   chat__header: {
     backgroundColor: "#f9fbfc",
@@ -45,14 +46,14 @@ const useStyles = makeStyles({
     backgroundColor: "#e7eff7",
     borderRadius: "10px",
     width: "fit-content",
-    marginTop: "20px",
+    marginTop: "25px",
   },
   chat__reciever: {
     marginLeft: "auto",
     position: "relative",
     fontSize: "16px",
     padding: "10px",
-    color: "white",
+    color: "black",
     background:
       "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(50,223,141,1) 0%, rgba(97,227,165,1) 100%)",
     borderRadius: "10px",
@@ -62,7 +63,7 @@ const useStyles = makeStyles({
   chat__name: {
     position: "absolute",
     top: "-15px",
-    fontSize: "xx-small",
+    fontSize: "10px",
     color: "black",
     fontWeight: "bold",
   },
@@ -82,10 +83,10 @@ const useStyles = makeStyles({
     paddingLeft: "20px",
   },
   chat__footer__textfield: {
-    display: "flex",
+    width:"75%",
   },
   chat__text__field: {
-    width: "700px",
+    width: "100%",
   },
   chat__footer__icons: {},
   chat__header__right: {},
